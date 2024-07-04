@@ -19,10 +19,11 @@ const app = express();
 app.use(express.static('public'));
 
 const server = createServer(app);
-const PORT = 8080;
-const HOST = '127.0.0.1';
+const PORT = process.env.PORT || 8080;
+const HOST = '0.0.0.0'; // Use 0.0.0.0 to bind to all available network interfaces
 
 server.listen(PORT, HOST);
+
 server.on('error', (e) => {
   if (e.code === 'EADDRINUSE') {
     console.error('Address in use, retrying...');
